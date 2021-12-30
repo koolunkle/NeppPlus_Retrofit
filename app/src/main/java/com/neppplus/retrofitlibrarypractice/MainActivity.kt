@@ -1,11 +1,10 @@
 package com.neppplus.retrofitlibrarypractice
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.neppplus.retrofitlibrarypractice.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     lateinit var binding: ActivityMainBinding
 
@@ -13,5 +12,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
-    
+
 }
