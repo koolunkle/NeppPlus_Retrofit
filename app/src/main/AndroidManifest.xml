@@ -13,6 +13,9 @@
         android:theme="@style/Theme.RetrofitLibraryPractice"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SignUpActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
