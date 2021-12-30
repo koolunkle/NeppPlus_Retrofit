@@ -3,6 +3,7 @@ package com.neppplus.retrofitlibrarypractice
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import com.neppplus.retrofitlibrarypractice.databinding.ActivitySignUpBinding
 import com.neppplus.retrofitlibrarypractice.datas.BasicResponse
@@ -22,6 +23,13 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        binding.edtEmail.addTextChangedListener {
+//            Log.d("입력된내용", it.toString())
+
+//            재검사 요청
+            binding.txtEmailCheckResult.text = "이메일 중복검사를 해주세요."
+        }
 
         binding.btnEmailCheck.setOnClickListener {
 
