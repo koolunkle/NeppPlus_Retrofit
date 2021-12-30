@@ -7,6 +7,7 @@ import android.os.Looper
 import androidx.databinding.DataBindingUtil
 import com.neppplus.retrofitlibrarypractice.databinding.ActivitySplashBinding
 import com.neppplus.retrofitlibrarypractice.datas.BasicResponse
+import com.neppplus.retrofitlibrarypractice.datas.GlobalData
 import com.neppplus.retrofitlibrarypractice.datas.UserData
 import com.neppplus.retrofitlibrarypractice.utils.ContextUtil
 import retrofit2.Call
@@ -40,7 +41,7 @@ class SplashActivity : BaseActivity() {
                 ) {
                     // 올바른 토큰일 때 -> loginUser 파싱해서 객체 대입
                     if (response.isSuccessful) {
-                        loginUser = response.body()!!.data.user
+                        GlobalData.loginUser = response.body()!!.data.user
                     }
                 }
 
@@ -55,7 +56,7 @@ class SplashActivity : BaseActivity() {
 
             val myIntent: Intent
 
-            if (loginUser != null) {
+            if (GlobalData.loginUser != null) {
                 myIntent = Intent(mContext, MainActivity::class.java)
             } else {
                 myIntent = Intent(mContext, LoginActivity::class.java)
