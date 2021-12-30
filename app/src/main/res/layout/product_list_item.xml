@@ -6,16 +6,22 @@
     android:orientation="vertical"
     android:padding="10dp">
 
+    <ImageView
+        android:id="@+id/imgProductImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher" />
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgStoreLogo"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@mipmap/ic_launcher"
             app:civ_border_width="1dp" />
 
@@ -24,31 +30,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
-            android:text="가게이름 자리" />
+            android:text="가게이름" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/txtProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:text="상품 이름"
+        android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/txtProductName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="상품이름 자리"
-            android:textSize="17sp" />
-
-        <TextView
-            android:id="@+id/txtCategoryName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:text="(카테고리 자리)" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/txtProductPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="39,800원"
+        android:textSize="12sp" />
 
 </LinearLayout>
