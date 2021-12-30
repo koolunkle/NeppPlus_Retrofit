@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.neppplus.retrofitlibrarypractice.R
+import com.neppplus.retrofitlibrarypractice.adapters.ReviewRecyclerAdapter
 import com.neppplus.retrofitlibrarypractice.databinding.FragmentReviewListBinding
 import com.neppplus.retrofitlibrarypractice.datas.BasicResponse
 import com.neppplus.retrofitlibrarypractice.datas.ReviewData
@@ -18,6 +20,8 @@ class ReviewListFragment : BaseFragment() {
     lateinit var binding: FragmentReviewListBinding
 
     val mReviewList = ArrayList<ReviewData>()
+
+    lateinit var mReviewAdapter: ReviewRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +46,10 @@ class ReviewListFragment : BaseFragment() {
 
         getReviewListFromServer()
 
+        mReviewAdapter = ReviewRecyclerAdapter(mContext, mReviewList)
+        binding.reviewListRecyclerView.adapter = mReviewAdapter
+        binding.reviewListRecyclerView.layoutManager = LinearLayoutManager(mContext)
+
     }
 
     fun getReviewListFromServer() {
@@ -52,6 +60,7 @@ class ReviewListFragment : BaseFragment() {
                     val br = response.body()!!
                     mReviewList.clear()
                     mReviewList.addAll(br.data.reviews)
+                    mReviewAdapter.notifyDataSetChanged()
                 }
             }
 
