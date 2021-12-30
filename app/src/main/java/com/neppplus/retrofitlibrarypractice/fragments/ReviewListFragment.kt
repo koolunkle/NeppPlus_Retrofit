@@ -48,7 +48,8 @@ class ReviewListFragment : BaseFragment() {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if (response.isSuccessful) {
                     var br = response.body()!!
-
+                    mCategoryList.clear()
+                    mCategoryList.addAll(br.data.categories)
                 }
             }
 
