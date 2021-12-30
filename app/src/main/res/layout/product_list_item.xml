@@ -51,4 +51,10 @@
         android:text="39,800원"
         android:textSize="12sp" />
 
+    <Button
+        android:id="@+id/btnWriteReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="상품 리뷰 작성" />
+
 </LinearLayout>
