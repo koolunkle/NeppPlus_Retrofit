@@ -214,6 +214,29 @@ class LoginActivity : BaseActivity() {
                             "\n이메일: ${user.kakaoAccount?.email}" +
                             "\n닉네임: ${user.kakaoAccount?.profile?.nickname}"
                 )
+                apiService.postRequestSocialLogin(
+                    "kakao",
+                    user.id.toString(),
+                    user.kakaoAccount?.profile?.nickname!!
+                ).enqueue(object : Callback<BasicResponse> {
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val br = response.body()!!
+                            Toast.makeText(
+                                mContext,
+                                "${br.data.user.nickname}님, 환영합니다!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                    }
+                })
             }
         }
 
