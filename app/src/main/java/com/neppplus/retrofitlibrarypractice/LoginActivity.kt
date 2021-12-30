@@ -1,9 +1,7 @@
 package com.neppplus.retrofitlibrarypractice
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -13,11 +11,11 @@ import com.facebook.login.LoginResult
 import com.kakao.sdk.user.UserApiClient
 import com.neppplus.retrofitlibrarypractice.databinding.ActivityLoginBinding
 import com.neppplus.retrofitlibrarypractice.datas.BasicResponse
+import com.neppplus.retrofitlibrarypractice.utils.ContextUtil
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.security.MessageDigest
 import java.util.*
 
 class LoginActivity : BaseActivity() {
@@ -99,6 +97,13 @@ class LoginActivity : BaseActivity() {
                         val userNickname = basicResponse.data.user.nickname
                         Toast.makeText(mContext, "${userNickname}님, 환영합니다!", Toast.LENGTH_SHORT)
                             .show()
+
+//                        토큰 값 추출 -> 기기에 저장 (SharedPreferences)
+                        ContextUtil.setToken(
+                            mContext,
+                            basicResponse.data.token
+                        )
+
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
 
@@ -160,7 +165,7 @@ class LoginActivity : BaseActivity() {
                                                     Toast.LENGTH_SHORT
                                                 ).show()
 
-//                                                토큰 값 추출 -> 기기에 저장 (SharedPreferences)
+                                                ContextUtil.setToken(mContext, br.data.token)
 
                                                 val myIntent =
                                                     Intent(mContext, MainActivity::class.java)
@@ -242,6 +247,9 @@ class LoginActivity : BaseActivity() {
                                 "${br.data.user.nickname}님, 환영합니다!",
                                 Toast.LENGTH_SHORT
                             ).show()
+
+                            ContextUtil.setToken(mContext, br.data.token)
+
                             val myIntent = Intent(mContext, MainActivity::class.java)
                             startActivity(myIntent)
 
