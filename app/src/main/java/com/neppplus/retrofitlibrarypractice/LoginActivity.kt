@@ -7,9 +7,7 @@ import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
+import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.neppplus.retrofitlibrarypractice.databinding.ActivityLoginBinding
@@ -94,7 +92,23 @@ class LoginActivity : BaseActivity() {
         LoginManager.getInstance()
             .registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(result: LoginResult?) {
-                    Log.d("페북로그인", "로그인 성공")
+                    Log.d("페북로그인", result!!.accessToken.token)
+
+//                1차 로그인 결과로 받은 accessToken 활용
+//                내 정보를 받아오는데 활용
+//                페이스북 (graph) API 중 내 정보 가져오기 기능 요청
+
+                    val graphApiRequest = GraphRequest.newMeRequest(
+                        result.accessToken,
+                        object : GraphRequest.GraphJSONObjectCallback {
+                            override fun onCompleted(
+                                jsonObj: JSONObject?,
+                                response: GraphResponse?
+                            ) {
+                                Log.d("내정보요청", jsonObj.toString())
+                            }
+                        })
+                    graphApiRequest.executeAsync()
                 }
 
                 override fun onCancel() {
