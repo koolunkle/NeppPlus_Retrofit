@@ -188,11 +188,11 @@ class LoginActivity : BaseActivity() {
                 }
             })
 
-        getKeyHash()
+//        getKeyHash()
 
     }
 
-    fun getKeyHash() {
+    /*fun getKeyHash() {
 
         val info = packageManager.getPackageInfo(
             "com.neppplus.retrofitlibrarytest_20211122",
@@ -204,7 +204,7 @@ class LoginActivity : BaseActivity() {
             Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
         }
 
-    }
+    }*/
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         callbackManager.onActivityResult(requestCode, resultCode, data)
