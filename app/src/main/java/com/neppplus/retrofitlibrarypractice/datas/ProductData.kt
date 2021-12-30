@@ -1,6 +1,7 @@
 package com.neppplus.retrofitlibrarypractice.datas
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.text.NumberFormat
 import java.util.*
 
@@ -13,7 +14,7 @@ class ProductData(
     var price: Int,
     @SerializedName("image_url")
     var imageURL: String,
-) {
+) : Serializable {
     fun getFormattedPrice(): String {
         return "${NumberFormat.getInstance(Locale.KOREA).format(this.price)} 원"
     }

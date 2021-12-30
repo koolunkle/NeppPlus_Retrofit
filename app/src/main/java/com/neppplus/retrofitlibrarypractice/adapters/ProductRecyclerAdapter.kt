@@ -56,6 +56,7 @@ class ProductRecyclerAdapter(val mContext: Context, val mList: List<ProductData>
 
 //                리뷰 작성 화면 이동
                 val myIntent = Intent(mContext, EditReviewActivity::class.java)
+                myIntent.putExtra("product", data)
                 mContext.startActivity(myIntent)
 
             }
