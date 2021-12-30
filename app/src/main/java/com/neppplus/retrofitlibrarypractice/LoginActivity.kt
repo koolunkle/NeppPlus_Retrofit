@@ -11,6 +11,7 @@ import com.facebook.login.LoginResult
 import com.kakao.sdk.user.UserApiClient
 import com.neppplus.retrofitlibrarypractice.databinding.ActivityLoginBinding
 import com.neppplus.retrofitlibrarypractice.datas.BasicResponse
+import com.neppplus.retrofitlibrarypractice.datas.GlobalData
 import com.neppplus.retrofitlibrarypractice.utils.ContextUtil
 import org.json.JSONObject
 import retrofit2.Call
@@ -104,6 +105,9 @@ class LoginActivity : BaseActivity() {
                             basicResponse.data.token
                         )
 
+                        // 로그인 한 사람이 누군지 데이터 세팅
+                        GlobalData.loginUser = basicResponse.data.user
+
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
 
@@ -166,6 +170,8 @@ class LoginActivity : BaseActivity() {
                                                 ).show()
 
                                                 ContextUtil.setToken(mContext, br.data.token)
+
+                                                GlobalData.loginUser = br.data.user
 
                                                 val myIntent =
                                                     Intent(mContext, MainActivity::class.java)
@@ -249,6 +255,8 @@ class LoginActivity : BaseActivity() {
                             ).show()
 
                             ContextUtil.setToken(mContext, br.data.token)
+
+                            GlobalData.loginUser = br.data.user
 
                             val myIntent = Intent(mContext, MainActivity::class.java)
                             startActivity(myIntent)
