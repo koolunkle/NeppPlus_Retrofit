@@ -7,6 +7,11 @@ import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.neppplus.retrofitlibrarypractice.databinding.ActivityLoginBinding
 import com.neppplus.retrofitlibrarypractice.datas.BasicResponse
 import org.json.JSONObject
@@ -18,6 +23,8 @@ import java.security.MessageDigest
 class LoginActivity : BaseActivity() {
 
     lateinit var binding: ActivityLoginBinding
+
+    lateinit var callbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +80,25 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+        callbackManager = CallbackManager.Factory.create()
+        LoginManager.getInstance()
+            .registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+                override fun onSuccess(result: LoginResult?) {
+                    Log.d("페북로그인", "로그인 성공")
+                }
+
+                override fun onCancel() {
+
+                }
+
+                override fun onError(error: FacebookException?) {
+
+                }
+            })
+
         getKeyHash()
+
     }
 
     fun getKeyHash() {
@@ -88,6 +113,11 @@ class LoginActivity : BaseActivity() {
             Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
         }
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
 }
