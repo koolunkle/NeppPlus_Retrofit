@@ -9,6 +9,8 @@ class UserData(
     @SerializedName("nick_name")
     var nickname: String,
     @SerializedName("profile_img")
-    var profileImageURL: String
+    var profileImageURL: String,
+    var provider: String,
+    var uid: String?,
 ) {
 }

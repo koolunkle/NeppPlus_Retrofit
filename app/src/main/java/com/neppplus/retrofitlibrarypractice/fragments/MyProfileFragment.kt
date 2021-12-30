@@ -45,6 +45,20 @@ class MyProfileFragment : BaseFragment() {
         binding.txtNickname.text = GlobalData.loginUser!!.nickname
         Glide.with(mContext).load(GlobalData.loginUser!!.profileImageURL).into(binding.imgProfile)
 
+        when (GlobalData.loginUser!!.provider) {
+            "facebook" -> {
+                binding.imgProvider.setImageResource(R.drawable.facebook_logo)
+                binding.imgProvider.visibility = View.VISIBLE
+            }
+            "kakao" -> {
+                binding.imgProvider.setImageResource(R.drawable.kakao_logo)
+                binding.imgProvider.visibility = View.VISIBLE
+            }
+            else -> {
+                binding.imgProvider.visibility = View.GONE
+            }
+        }
+
     }
 
     fun getMyInfoFromServer() {
