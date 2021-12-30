@@ -7,6 +7,9 @@ class ProductData(
     var name: String,
     var store: StoreData,
     @SerializedName("small_category")
-    var smallCategory: SmallCategoryData
+    var smallCategory: SmallCategoryData,
+    var price: Int,
+    @SerializedName("image_url")
+    var imageURL: String,
 ) {
 }
