@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.neppplus.retrofitlibrarypractice.R
 import com.neppplus.retrofitlibrarypractice.datas.ReviewData
@@ -15,6 +16,18 @@ class ReviewRecyclerAdapter(
 
     inner class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        val txtReviewTitle = itemView.findViewById<TextView>(R.id.txtReviewTitle)
+        val txtReviewContent = itemView.findViewById<TextView>(R.id.txtReviewContent)
+        val txtScore = itemView.findViewById<TextView>(R.id.txtScore)
+        val txtUserNickname = itemView.findViewById<TextView>(R.id.txtUserNickname)
+        val txtProductName = itemView.findViewById<TextView>(R.id.txtProductName)
+
+        fun bind(data: ReviewData) {
+
+            txtReviewTitle.text = data.title
+
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
@@ -25,7 +38,7 @@ class ReviewRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
-
+        holder.bind(mList[position])
     }
 
     override fun getItemCount() = mList.size
