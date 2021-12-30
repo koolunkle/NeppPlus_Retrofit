@@ -1,5 +1,6 @@
 package com.neppplus.retrofitlibrarypractice.adapters
 
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +37,19 @@ class ProductRecyclerAdapter(val mContext: Context, val mList: List<ProductData>
 
             rootLayout.setOnClickListener {
                 Toast.makeText(mContext, "${data.name} 상품 클릭됨", Toast.LENGTH_SHORT).show()
+            }
+
+            rootLayout.setOnLongClickListener {
+
+                val alert = AlertDialog.Builder(mContext)
+                alert.setTitle("상품 삭제")
+                alert.setMessage("정말 해당 상품을 삭제하겠습니까?")
+                alert.setPositiveButton("확인", null)
+                alert.setNegativeButton("취소", null)
+                alert.show()
+
+                return@setOnLongClickListener true
+
             }
 
         }
