@@ -32,7 +32,15 @@ class SignUpActivity : BaseActivity() {
                         call: Call<BasicResponse>,
                         response: Response<BasicResponse>
                     ) {
+//                        code : 200 -> 사용해도 좋은 이메일
+                        if (response.isSuccessful) {
+                            binding.txtEmailCheckResult.text = "사용해도 좋은 이메일 입니다."
 
+                        }
+//                        사용하면 안되는 이메일
+                        else {
+                            binding.txtEmailCheckResult.text = "다른 이메일로 다시 검사해주세요."
+                        }
                     }
 
                     override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
