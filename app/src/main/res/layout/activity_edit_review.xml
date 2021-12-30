@@ -76,6 +76,26 @@
             android:hint="리뷰 내용을 작성해주세요."
             android:minLines="5" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="# 키워드 입력하기" />
+
+        <EditText
+            android:id="@+id/edtTag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="스페이스바를 누르면 하나의 태그로 입력됩니다."
+            android:singleLine="true" />
+
+        <LinearLayout
+            android:id="@+id/tagListLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
         <Button
             android:id="@+id/btnWrite"
             android:layout_width="match_parent"

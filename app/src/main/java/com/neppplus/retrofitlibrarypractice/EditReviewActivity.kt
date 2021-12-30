@@ -2,6 +2,7 @@ package com.neppplus.retrofitlibrarypractice
 
 import android.os.Bundle
 import android.util.Log
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import com.neppplus.retrofitlibrarypractice.databinding.ActivityEditReviewBinding
 import com.neppplus.retrofitlibrarypractice.datas.BasicResponse
@@ -19,6 +20,8 @@ class EditReviewActivity : BaseActivity() {
 
     lateinit var mProductData: ProductData
 
+    val mInputTagList = ArrayList<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_review)
@@ -28,7 +31,39 @@ class EditReviewActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+//        한글자 입력할 때마다 -> 스페이스를 넣었는지 검사
+
+        binding.edtTag.addTextChangedListener {
+
+            val nowText = it.toString()
+            if (nowText == "") {
+//                빈칸일 때는 아래 코드 실행 X
+                return@addTextChangedListener
+            }
+            Log.d("입력값", nowText)
+
+//            지금 입력된 내용의 마지막 글자(Char)가 ' ' 글자인가?
+            if (nowText.last() == ' ') {
+                Log.d("입력값", "스페이스가 들어옴")
+
+//                입력된 값 태그 등록 및 태그로 등록될 문구 " " 공백 제거
+                val tag = nowText.replace(" ", "")
+
+//                태그 목록으로 추가
+                mInputTagList.add(tag)
+
+//                입력 값 초기화
+                binding.edtTag.setText("")
+            }
+
+        }
+
         binding.btnWrite.setOnClickListener {
+
+            for (tag in mInputTagList) {
+                Log.d("입력태그", tag)
+            }
+            return@setOnClickListener
 
             val inputTitle = binding.edtReviewTitle.text.toString()
             val inputContent = binding.edtContent.text.toString()
