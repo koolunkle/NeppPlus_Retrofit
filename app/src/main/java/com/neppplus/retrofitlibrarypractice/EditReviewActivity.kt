@@ -2,6 +2,7 @@ package com.neppplus.retrofitlibrarypractice
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
@@ -53,10 +54,11 @@ class EditReviewActivity : BaseActivity() {
 //                태그 목록으로 추가
                 mInputTagList.add(tag)
 
-//                태그 목록 보여줄 레이아웃에 텍스트뷰 생성(kt 에서 텍스트뷰 생성)
-                val tagTextView = TextView(mContext)
-                tagTextView.text = tag
-                binding.tagListLayout.addView(tagTextView)
+//                태그 목록 보여줄 레이아웃에 xml 끌어오기 -> 그 내부의 텍스트뷰에 문구 변경
+                val tagBox = LayoutInflater.from(mContext).inflate(R.layout.tag_list_item, null)
+                val txtTag = tagBox.findViewById<TextView>(R.id.txtTag)
+                txtTag.text = "#${tag}"
+                binding.tagListLayout.addView(tagBox)
 
 //                입력 값 초기화
                 binding.edtTag.setText("")

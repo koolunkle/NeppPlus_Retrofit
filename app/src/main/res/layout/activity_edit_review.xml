@@ -92,7 +92,8 @@
             android:id="@+id/tagListLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:flRowSpacing="5dp">
 
         </com.nex3z.flowlayout.FlowLayout>
 
