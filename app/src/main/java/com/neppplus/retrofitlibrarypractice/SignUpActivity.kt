@@ -17,6 +17,14 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        binding.btnSignUp.setOnClickListener {
+
+            val email = binding.edtEmail.text.toString()
+            val password = binding.edtPassword.text.toString()
+            val nickname = binding.edtNickname.text.toString()
+
+        }
+
     }
 
     override fun setValues() {
