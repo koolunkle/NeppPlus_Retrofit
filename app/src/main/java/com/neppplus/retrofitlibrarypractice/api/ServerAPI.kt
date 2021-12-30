@@ -1,11 +1,13 @@
 package com.neppplus.retrofitlibrarypractice.api
 
 import android.content.Context
+import com.google.gson.GsonBuilder
 import com.neppplus.retrofitlibrarypractice.utils.ContextUtil
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 class ServerAPI {
 
@@ -41,7 +43,7 @@ class ServerAPI {
 
                 }
 
-//                Retrofit은 OkHttp의 확장판 -> 클라이언트의 역할 : OkHttpClient 클래스 활용
+//                Retrofit 은 OkHttp 의 확장판 -> 클라이언트의 역할 : OkHttpClient 클래스 활용
 
 //                커스텀 통신 클라이언트 제작 (API 요청에 헤더를 붙이는)
 
@@ -49,11 +51,20 @@ class ServerAPI {
                     .addInterceptor(interceptor)
                     .build()
 
+//                2. 서버가 주는 일시를 -> Date 타입으로 자동 변환 (파싱 -> gson) 세팅
+
+//                gson 에서 날짜 양식을 어떻게 파싱할 것인지?
+
+                val gson = GsonBuilder()
+                    .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .registerTypeAdapter(Date::class.java, DateDeserializer()) // 실제 파싱 진행 클래스 객체
+                    .create()
+
                 retrofit = Retrofit.Builder()
                     // 어느 서버로 접속?
                     .baseUrl(BASE_URL)
                     // 파싱을 자동 도구로 활용
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson)) // 파싱을 자동 도구로 활용
                     .client(myClient)
                     .build()
             }
