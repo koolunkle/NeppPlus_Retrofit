@@ -59,4 +59,14 @@ interface ServerAPIService {
         @Field("value") value: String,
     ): Call<BasicResponse>
 
+    // 리뷰 작성
+    @FormUrlEncoded
+    @POST("/review")
+    fun postRequestReview(
+        @Field("product_id") productId: Int,
+        @Field("title") title: String,
+        @Field("content") content: String,
+        @Field("score") rating: Int
+    ): Call<BasicResponse>
+
 }
