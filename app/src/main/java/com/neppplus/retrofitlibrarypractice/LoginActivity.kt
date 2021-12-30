@@ -106,6 +106,34 @@ class LoginActivity : BaseActivity() {
                                 response: GraphResponse?
                             ) {
                                 Log.d("내정보요청", jsonObj.toString())
+
+//                                서버(api.gudoc.in)에 소셜 로그인 성공 요청 호출
+                                val name = jsonObj!!.getString("name")
+                                val id = jsonObj.getString("id")
+
+                                apiService.postRequestSocialLogin("facebook", id, name)
+                                    .enqueue(object : Callback<BasicResponse> {
+                                        override fun onResponse(
+                                            call: Call<BasicResponse>,
+                                            response: Response<BasicResponse>
+                                        ) {
+                                            if (response.isSuccessful) {
+                                                val br = response.body()!!
+                                                Toast.makeText(
+                                                    mContext,
+                                                    "${br.data.user.nickname}님, 환영합니다!",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                        }
+
+                                        override fun onFailure(
+                                            call: Call<BasicResponse>,
+                                            t: Throwable
+                                        ) {
+
+                                        }
+                                    })
                             }
                         })
                     graphApiRequest.executeAsync()
