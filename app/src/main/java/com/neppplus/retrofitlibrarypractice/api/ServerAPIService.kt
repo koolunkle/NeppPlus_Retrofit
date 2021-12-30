@@ -2,10 +2,7 @@ package com.neppplus.retrofitlibrarypractice.api
 
 import com.neppplus.retrofitlibrarypractice.datas.BasicResponse
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 interface ServerAPIService {
 
@@ -24,6 +21,13 @@ interface ServerAPIService {
         @Field("email") email: String,
         @Field("password") pw: String,
         @Field("nick_name") nick: String,
+    ): Call<BasicResponse>
+
+    // 중복 확인 기능  - GET
+    @GET("/user/check")
+    fun getRequestDuplicatedCheck(
+        @Query("type") type: String,
+        @Query("value") value: String,
     ): Call<BasicResponse>
 
 }

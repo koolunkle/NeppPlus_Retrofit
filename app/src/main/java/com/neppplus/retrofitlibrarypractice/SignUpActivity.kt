@@ -23,6 +23,25 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        binding.btnEmailCheck.setOnClickListener {
+
+            val email = binding.edtEmail.text.toString()
+            apiService.getRequestDuplicatedCheck("EMAIL", email)
+                .enqueue(object : Callback<BasicResponse> {
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+
+                    }
+
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                    }
+                })
+
+        }
+
         binding.btnSignUp.setOnClickListener {
 
             val email = binding.edtEmail.text.toString()
