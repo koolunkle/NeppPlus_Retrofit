@@ -40,10 +40,7 @@ interface ServerAPIService {
     ): Call<BasicResponse>
 
     // 내 정보 조회 - GET / 토큰 값 (임시 방안)
-    @GET("/user")
-    fun getRequestMyInfo(
-        @Header("X-Http-Token") token: String,
-    ): Call<BasicResponse>
+    fun getRequestMyInfo(): Call<BasicResponse>
 
     // 상품 목록 받아오기 - GET / 아무 파라미터도 없음 (서버의 임시 API)
     @GET("/product")

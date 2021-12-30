@@ -10,7 +10,6 @@ import com.neppplus.retrofitlibrarypractice.R
 import com.neppplus.retrofitlibrarypractice.databinding.FragmentMyProfileBinding
 import com.neppplus.retrofitlibrarypractice.datas.BasicResponse
 import com.neppplus.retrofitlibrarypractice.datas.GlobalData
-import com.neppplus.retrofitlibrarypractice.utils.ContextUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,8 +62,7 @@ class MyProfileFragment : BaseFragment() {
 
     fun getMyInfoFromServer() {
 
-        apiService.getRequestMyInfo(ContextUtil.getToken(mContext)).enqueue(object :
-            Callback<BasicResponse> {
+        apiService.getRequestMyInfo().enqueue(object : Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if (response.isSuccessful) {
                     val br = response.body()!!
