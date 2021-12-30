@@ -88,13 +88,13 @@
             android:hint="스페이스바를 누르면 하나의 태그로 입력됩니다."
             android:singleLine="true" />
 
-        <LinearLayout
+        <com.nex3z.flowlayout.FlowLayout
             android:id="@+id/tagListLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-        </LinearLayout>
+        </com.nex3z.flowlayout.FlowLayout>
 
         <Button
             android:id="@+id/btnWrite"
