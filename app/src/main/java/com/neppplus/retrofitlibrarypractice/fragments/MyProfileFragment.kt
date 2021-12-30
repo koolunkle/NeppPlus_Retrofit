@@ -3,6 +3,7 @@ package com.neppplus.retrofitlibrarypractice.fragments
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,8 @@ import com.neppplus.retrofitlibrarypractice.R
 import com.neppplus.retrofitlibrarypractice.databinding.FragmentMyProfileBinding
 import com.neppplus.retrofitlibrarypractice.datas.BasicResponse
 import com.neppplus.retrofitlibrarypractice.datas.GlobalData
+import com.neppplus.retrofitlibrarypractice.utils.ContextUtil
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,8 +57,42 @@ class MyProfileFragment : BaseFragment() {
             val edtNickname = customView.findViewById<EditText>(R.id.edtNickname)
             alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
                 val inputNickname = edtNickname.text.toString()
-                Toast.makeText(mContext, inputNickname, Toast.LENGTH_SHORT).show()
+
+                apiService.patchRequestEditUserInfo("nickname", inputNickname)
+                    .enqueue(object : Callback<BasicResponse> {
+                        override fun onResponse(
+                            call: Call<BasicResponse>,
+                            response: Response<BasicResponse>
+                        ) {
+                            if (response.isSuccessful) {
+                                val br = response.body()!!
+
+//                            토큰 값 추출 -> 다시 저장
+                                val token = br.data.token
+                                ContextUtil.setToken(mContext, token)
+
+                                Toast.makeText(mContext, "닉네임 변경에 성공했습니다.", Toast.LENGTH_SHORT)
+                                    .show()
+
+                                getMyInfoFromServer()
+
+                            } else {
+//                            닉네임 변경 실패 -> 중복 막는 경우
+                                val jsonObj = JSONObject(response.errorBody()!!.string())
+                                Log.e("닉네임변경실패", jsonObj.toString())
+
+                                val message = jsonObj.getString("message")
+                                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                        }
+                    })
+
             })
+
             alert.setNegativeButton("취소", null)
             alert.show()
 
