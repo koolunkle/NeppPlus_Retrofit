@@ -40,7 +40,7 @@ class MyProfileFragment : BaseFragment() {
 
     override fun setValues() {
 
-//        getMyInfoFromServer()
+        getMyInfoFromServer()
 
         binding.txtNickname.text = GlobalData.loginUser!!.nickname
         Glide.with(mContext).load(GlobalData.loginUser!!.profileImageURL).into(binding.imgProfile)
