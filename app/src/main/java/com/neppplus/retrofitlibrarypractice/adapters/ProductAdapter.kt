@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.neppplus.retrofitlibrarypractice.R
 import com.neppplus.retrofitlibrarypractice.datas.ProductData
 
@@ -24,8 +26,14 @@ class ProductAdapter(
         }
         val row = tempRow!!
         val data = mList[position]
+
         val txtProductName = row.findViewById<TextView>(R.id.txtProductName)
+        val imgStoreLogo = row.findViewById<ImageView>(R.id.imgStoreLogo)
+        val txtStoreName = row.findViewById<TextView>(R.id.txtStoreName)
+
         txtProductName.text = data.name
+        txtStoreName.text = data.store.name
+        Glide.with(mContext).load(data.store.logoURL).into(imgStoreLogo)
 
         return row
     }
