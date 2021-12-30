@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.neppplus.retrofitlibrarypractice.R
 import com.neppplus.retrofitlibrarypractice.adapters.ProductRecyclerAdapter
 import com.neppplus.retrofitlibrarypractice.databinding.FragmentProductListBinding
@@ -49,7 +50,8 @@ class ProductListFragment : BaseFragment() {
 
         mProductRecyclerAdapter = ProductRecyclerAdapter(mContext, mProductList)
         binding.productListRecyclerView.adapter = mProductRecyclerAdapter
-        binding.productListRecyclerView.layoutManager = LinearLayoutManager(mContext)
+        binding.productListRecyclerView.layoutManager =
+            StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
 
     }
 
