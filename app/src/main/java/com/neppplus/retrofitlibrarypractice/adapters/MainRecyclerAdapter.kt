@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
 import com.neppplus.retrofitlibrarypractice.R
 import com.neppplus.retrofitlibrarypractice.datas.ReviewData
 
@@ -19,8 +20,11 @@ class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
     inner class HeaderViewHolder(row: View) : RecyclerView.ViewHolder(row) {
 
         val imgCategory1 = row.findViewById<ImageView>(R.id.imgCategory1)
+        val bannerViewPager = row.findViewById<ViewPager>(R.id.bannerViewPager)
 
         fun bind() {
+//            bannerViewPager.adapter = ?
+
             imgCategory1.setOnClickListener {
                 Toast.makeText(mContext, "1번카테고리 눌림", Toast.LENGTH_SHORT).show()
             }
