@@ -1,11 +1,17 @@
 package com.neppplus.retrofitlibrarypractice
 
+import android.Manifest
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.normal.TedPermission
 import com.neppplus.retrofitlibrarypractice.databinding.ActivityEditReviewBinding
 import com.neppplus.retrofitlibrarypractice.datas.BasicResponse
 import com.neppplus.retrofitlibrarypractice.datas.GlobalData
@@ -24,6 +30,9 @@ class EditReviewActivity : BaseActivity() {
 
     val mInputTagList = ArrayList<String>()
 
+    // 대표 사진 가지러 간다고 메모
+    val REQ_FOR_THUMBNAIL = 1004
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_review)
@@ -32,6 +41,34 @@ class EditReviewActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        val ocl = View.OnClickListener {
+
+//            권한 체크 (갤러리 조회 가능?)
+            val pl = object : PermissionListener {
+
+                override fun onPermissionGranted() {
+//                    권한 있을 때? 리뷰 대표 사진을 가지러 이동 (갤러리 이동)
+                    val myIntent = Intent()
+                    myIntent.action = Intent.ACTION_PICK
+                    myIntent.type = android.provider.MediaStore.Images.Media.CONTENT_TYPE
+                    startActivityForResult(myIntent, REQ_FOR_THUMBNAIL)
+                }
+
+                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    Toast.makeText(mContext, "갤러리 조회 권한 없음", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            TedPermission.create()
+                .setPermissionListener(pl)
+                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .check()
+
+        }
+
+        binding.txtEmptyImg.setOnClickListener(ocl)
 
         binding.img1.setOnClickListener {
 
@@ -96,17 +133,19 @@ class EditReviewActivity : BaseActivity() {
 
         binding.btnWrite.setOnClickListener {
 
-            for (tag in mInputTagList) {
-                Log.d("입력태그", tag)
-            }
-            return@setOnClickListener
-
             val inputTitle = binding.edtReviewTitle.text.toString()
             val inputContent = binding.edtContent.text.toString()
 
 //            몇점 입력?
             val rating = binding.ratingBar.rating.toInt()
             Log.d("평점 점수", rating.toString())
+
+//            태그 임시 : ""
+            val tagStr = ""
+
+//            선택한 사진 첨부
+
+//            선택한 사진 추출
 
             apiService.postRequestReview(mProductData.id, inputTitle, inputContent, rating)
                 .enqueue(object : Callback<BasicResponse> {
