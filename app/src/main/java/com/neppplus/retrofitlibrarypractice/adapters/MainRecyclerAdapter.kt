@@ -1,6 +1,8 @@
 package com.neppplus.retrofitlibrarypractice.adapters
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,8 @@ import com.neppplus.retrofitlibrarypractice.MainActivity
 import com.neppplus.retrofitlibrarypractice.R
 import com.neppplus.retrofitlibrarypractice.datas.BannerData
 import com.neppplus.retrofitlibrarypractice.datas.ReviewData
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -41,6 +45,28 @@ class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
             )
 
             bannerViewPager.adapter = bannerViewPagerAdapter
+
+//            완성된 배너 어댑터에 -> 2초마다 다음 그림으로 넘어가게 -> 할 일(코드) 생성
+
+            val nextPage = {
+
+            } // Runnable : 할 일이 담긴 변수
+
+//            타이머 안에서 할 일을 -> UI 스레드로 전달해주는 도구 (Handler)
+            val myHandler = Handler(Looper.getMainLooper())
+
+//            Timer 클래스 활용 -> 할 일(코드)을 2초마다 반복
+            val timer = Timer()
+            timer.schedule(object : TimerTask() {
+                override fun run() {
+
+//                    반복 수행할 코드 -> UI 스레드가 아님 (UI 조작 / 앱 죽음)
+//                    UI 스레드에다가 -> nextPage 에 적힌 할 일을 실행하도록 넘겨주자
+                    myHandler.post(nextPage)
+
+                }
+
+            }, 2000, 2000)
 
             imgCategory1.setOnClickListener {
                 Toast.makeText(mContext, "1번카테고리 눌림", Toast.LENGTH_SHORT).show()
