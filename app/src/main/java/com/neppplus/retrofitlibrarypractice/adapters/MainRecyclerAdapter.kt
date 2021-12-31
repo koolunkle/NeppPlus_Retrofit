@@ -46,9 +46,24 @@ class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
 
             bannerViewPager.adapter = bannerViewPagerAdapter
 
-//            완성된 배너 어댑터에 -> 2초마다 다음 그림으로 넘어가게 -> 할 일(코드) 생성
+//            완성된 배너 어댑터에 -> 2초마다 다음 그림으로 넘어가게 (ViewPager 에게 다음 페이지로) -> 할 일(코드) 생성
+
+//            시작은 0 페이지에서
+            var currentPage = 0
 
             val nextPage = {
+
+//                다음쪽으로 페이지 수 증가
+                currentPage++
+
+//                증가후 검사 -> 3장짜리인데, 3번 칸으로 가게 하면? 범위 벗어나는 에러
+                if (currentPage == mBannerList.size) {
+//                    가야할 페이지가 3번 칸이라면 -> 처음으로 돌아가게 하자
+                    currentPage = 0
+                }
+
+//                뷰페이저에 페이지 이동
+                bannerViewPager.currentItem = currentPage
 
             } // Runnable : 할 일이 담긴 변수
 
