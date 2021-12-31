@@ -4,12 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.databinding.DataBindingUtil
+import com.google.firebase.messaging.FirebaseMessaging
 import com.neppplus.retrofitlibrarypractice.databinding.ActivitySplashBinding
 import com.neppplus.retrofitlibrarypractice.datas.BasicResponse
 import com.neppplus.retrofitlibrarypractice.datas.GlobalData
-import com.neppplus.retrofitlibrarypractice.datas.UserData
-import com.neppplus.retrofitlibrarypractice.utils.ContextUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +30,17 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+//        푸시용 기기 토큰 발급 요청
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+
+//            토큰을 잘 받아왔다면
+            if (it.isSuccessful) {
+                val deviceToken = it.result
+                Log.d("FCM토큰", deviceToken!!)
+            }
+
+        }
 
         apiService.getRequestMyInfo().enqueue(object : Callback<BasicResponse> {
             override fun onResponse(
