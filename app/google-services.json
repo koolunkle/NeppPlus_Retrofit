@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "137820454130",
+    "project_id": "retrofitlibrarypractice-e355a",
+    "storage_bucket": "retrofitlibrarypractice-e355a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137820454130:android:1a219f7b725e20d9d2a46b",
+        "android_client_info": {
+          "package_name": "com.neppplus.retrofitlibrarypractice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137820454130-s1gsmtde9e3bkstqq28kn75dtghv73b9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8D_oi-vFxlRp5JNygQz7vxJa2Mks6gc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137820454130-s1gsmtde9e3bkstqq28kn75dtghv73b9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
