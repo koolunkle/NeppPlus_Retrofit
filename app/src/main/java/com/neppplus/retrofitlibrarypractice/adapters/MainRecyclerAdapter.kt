@@ -9,11 +9,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.neppplus.retrofitlibrarypractice.MainActivity
 import com.neppplus.retrofitlibrarypractice.R
+import com.neppplus.retrofitlibrarypractice.datas.BannerData
 import com.neppplus.retrofitlibrarypractice.datas.ReviewData
 
 class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    // 화면 상단에 보여줄 배너 목록을 담고있는 ArrayList
+    val mBannerList = ArrayList<BannerData>()
 
 //    2가지 ViewHolder 필요 -> 0번 칸 : 상단부(Header) xml / 나머지 칸(Item) : 리뷰 모양 xml
 
@@ -23,7 +28,16 @@ class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
         val bannerViewPager = row.findViewById<ViewPager>(R.id.bannerViewPager)
 
         fun bind() {
-//            bannerViewPager.adapter = ?
+
+//            배너 페이지 어댑터를 생성
+//            1. fm (FragmentManager) -> 화면 mContext (Context) -> MainActivity 변신 -> supportFragmentManager
+//            2. bannerList -> Fragment 에서 -> 배너 목록 API 호출 -> 파싱된 것을 받아오자
+            val bannerViewPagerAdapter = BannerViewPagerAdapter(
+                (mContext as MainActivity).supportFragmentManager,
+                mBannerList
+            )
+
+            bannerViewPager.adapter = bannerViewPagerAdapter
 
             imgCategory1.setOnClickListener {
                 Toast.makeText(mContext, "1번카테고리 눌림", Toast.LENGTH_SHORT).show()
