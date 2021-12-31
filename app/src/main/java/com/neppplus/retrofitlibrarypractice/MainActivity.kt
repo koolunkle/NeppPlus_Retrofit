@@ -71,6 +71,9 @@ class MainActivity : BaseActivity() {
         mvpa = MainViewPagerAdapter(supportFragmentManager)
         binding.mainViewPager.adapter = mvpa
 
+//        뷰페이저가 3장의 프래그먼트를 계속 메모리에 유지시키게 하자
+        binding.mainViewPager.offscreenPageLimit = 3
+
         binding.mainTabLayout.setupWithViewPager(binding.mainViewPager)
 
     }
