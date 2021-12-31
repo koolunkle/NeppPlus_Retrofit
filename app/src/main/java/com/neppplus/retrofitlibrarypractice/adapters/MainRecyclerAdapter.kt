@@ -20,6 +20,9 @@ class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
     // 화면 상단에 보여줄 배너 목록을 담고있는 ArrayList
     val mBannerList = ArrayList<BannerData>()
 
+    // 상단 뷰페이저 어댑터 변수 -> 객체는 bind 에서 생성
+    lateinit var bannerViewPagerAdapter: BannerViewPagerAdapter
+
 //    2가지 ViewHolder 필요 -> 0번 칸 : 상단부(Header) xml / 나머지 칸(Item) : 리뷰 모양 xml
 
     inner class HeaderViewHolder(row: View) : RecyclerView.ViewHolder(row) {
@@ -32,7 +35,7 @@ class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
 //            배너 페이지 어댑터를 생성
 //            1. fm (FragmentManager) -> 화면 mContext (Context) -> MainActivity 변신 -> supportFragmentManager
 //            2. bannerList -> Fragment 에서 -> 배너 목록 API 호출 -> 파싱된 것을 받아오자
-            val bannerViewPagerAdapter = BannerViewPagerAdapter(
+            bannerViewPagerAdapter = BannerViewPagerAdapter(
                 (mContext as MainActivity).supportFragmentManager,
                 mBannerList
             )
