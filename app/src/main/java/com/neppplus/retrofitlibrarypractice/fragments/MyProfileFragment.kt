@@ -1,7 +1,9 @@
 package com.neppplus.retrofitlibrarypractice.fragments
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,6 +27,8 @@ class MyProfileFragment : BaseFragment() {
 
     lateinit var binding: FragmentMyProfileBinding
 
+    val REQ_FOR_GALLERY = 1000
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,7 +44,33 @@ class MyProfileFragment : BaseFragment() {
         setValues()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQ_FOR_GALLERY) {
+            if (resultCode == Activity.RESULT_OK) {
+//                선택한 이미지 받아오기
+                val selectedImageUri = data?.data
+                Log.d("선택된이미지URI", selectedImageUri.toString())
+
+//                Uri -> 실제 첨부 가능한 파일로 변환해야 함
+
+            }
+        }
+
+    }
+
     override fun setupEvents() {
+
+        binding.imgProfile.setOnClickListener {
+
+//            갤러리(안드로이드 제공)로 사진 가지러 이동 (왕복 이동)
+            val myIntent = Intent()
+            myIntent.action = Intent.ACTION_PICK
+            myIntent.type = android.provider.MediaStore.Images.Media.CONTENT_TYPE
+            startActivityForResult(myIntent, REQ_FOR_GALLERY)
+
+        }
 
         binding.btnEditNickname.setOnClickListener {
 
