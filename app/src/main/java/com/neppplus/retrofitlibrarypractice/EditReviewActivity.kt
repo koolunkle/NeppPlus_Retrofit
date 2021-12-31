@@ -150,7 +150,12 @@ class EditReviewActivity : BaseActivity() {
 
 //            선택한 사진 첨부
 
-//            선택한 사진 추출
+//            선택한 사진 추출 -> mSelectedThumbnailUri 에 담겨있다
+//            mSelectedThumbnailUri 가 null? -> 아직 첨부 X
+            if (mSelectedThumbnailUri == null) {
+                Toast.makeText(mContext, "대표 이미지를 첨부해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             apiService.postRequestReview(mProductData.id, inputTitle, inputContent, rating)
                 .enqueue(object : Callback<BasicResponse> {
