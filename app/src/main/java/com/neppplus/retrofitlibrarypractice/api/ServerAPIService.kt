@@ -85,4 +85,10 @@ interface ServerAPIService {
     @GET("/main/banner")
     fun getRequestMainBanner(): Call<BasicResponse>
 
+    // 대분류 (1번) -> 소분류 목록 (Path Segment)
+    @GET("/category/{large_category_id}")
+    fun getRequestSmallCategoryInLargeCategory(
+        @Path("large_category_id") id: Int,
+    ): Call<BasicResponse>
+
 }
