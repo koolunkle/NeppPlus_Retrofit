@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.neppplus.retrofitlibrarypractice.R
 import com.neppplus.retrofitlibrarypractice.datas.ReviewData
@@ -18,6 +20,14 @@ class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
     }
 
     inner class ItemViewHolder(row: View) : RecyclerView.ViewHolder(row) {
+
+        val txtReviewProductName = row.findViewById<TextView>(R.id.txtReviewProductName)
+        val txtReviewerName = row.findViewById<TextView>(R.id.txtReviewerName)
+
+        fun bind(data: ReviewData) {
+            txtReviewProductName.text = data.product.name
+            txtReviewerName.text = data.user.nickname
+        }
 
     }
 
@@ -55,6 +65,15 @@ class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+        when (holder) {
+            is HeaderViewHolder -> {
+            }
+            is ItemViewHolder -> {
+//                리뷰 아이템 바인딩
+                holder.bind(mList[position - 1])
+            }
+        }
 
     }
 
