@@ -52,6 +52,18 @@ class MainActivity : BaseActivity() {
 
 //        2. 바텀네비게이션 클릭 -> 뷰페이저 페이지 이동
 
+        binding.mainBottomNavView.setOnItemSelectedListener {
+
+            when (it.itemId) {
+                R.id.home -> binding.mainViewPager.currentItem = 0
+                R.id.ranking -> binding.mainViewPager.currentItem = 1
+                R.id.myProfile -> binding.mainViewPager.currentItem = 2
+            }
+
+            return@setOnItemSelectedListener true
+
+        }
+
     }
 
     override fun setValues() {
