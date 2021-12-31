@@ -1,9 +1,11 @@
 package com.neppplus.retrofitlibrarypractice.adapters
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.neppplus.retrofitlibrarypractice.R
 import com.neppplus.retrofitlibrarypractice.datas.ReviewData
 
 class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
@@ -35,6 +37,20 @@ class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
+        return when (viewType) {
+            HEADER_VIEW_TYPE -> {
+                val row = LayoutInflater.from(mContext)
+                    .inflate(R.layout.main_recycler_item_top_view, parent, false)
+                HeaderViewHolder(row)
+            }
+            else -> {
+//                리뷰 아이템
+                val row = LayoutInflater.from(mContext)
+                    .inflate(R.layout.main_recycler_item_review_item, parent, false)
+                ItemViewHolder(row)
+            }
+        }
 
     }
 
