@@ -81,4 +81,8 @@ interface ServerAPIService {
         @Part img: MultipartBody.Part
     ): Call<BasicResponse>
 
+    // 메인화면 배너 목록
+    @GET("/main/banner")
+    fun getRequestMainBanner(): Call<BasicResponse>
+
 }

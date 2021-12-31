@@ -50,10 +50,28 @@ class RecyclerViewPracticeFragment : BaseFragment() {
     override fun setValues() {
 
         getReviewListFromServer()
+        getBannerListFromServer()
 
         mMainRecyclerAdapter = MainRecyclerAdapter(mContext, mReviewList)
         binding.mainRecyclerView.adapter = mMainRecyclerAdapter
         binding.mainRecyclerView.layoutManager = LinearLayoutManager(mContext)
+
+    }
+
+    fun getBannerListFromServer() {
+
+        apiService.getRequestMainBanner().enqueue(object : Callback<BasicResponse> {
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                if (response.isSuccessful) {
+                    val br = response.body()!!
+
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+        })
 
     }
 

@@ -6,6 +6,7 @@ class DataResponse(
     // 아래 변수는 상품 목록에서만 사용
     var products: List<ProductData>,
     var categories: List<SmallCategoryData>,
-    var reviews: List<ReviewData>
+    var reviews: List<ReviewData>,
+    var banners: List<BannerData>
 ) {
 }
