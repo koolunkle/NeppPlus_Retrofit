@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.neppplus.retrofitlibrarypractice.R
 import com.neppplus.retrofitlibrarypractice.datas.ReviewData
@@ -16,6 +17,14 @@ class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
 //    2가지 ViewHolder 필요 -> 0번 칸 : 상단부(Header) xml / 나머지 칸(Item) : 리뷰 모양 xml
 
     inner class HeaderViewHolder(row: View) : RecyclerView.ViewHolder(row) {
+
+        val imgCategory1 = row.findViewById<ImageView>(R.id.imgCategory1)
+
+        fun bind() {
+            imgCategory1.setOnClickListener {
+                Toast.makeText(mContext, "1번카테고리 눌림", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     }
 
@@ -68,6 +77,7 @@ class MainRecyclerAdapter(val mContext: Context, val mList: List<ReviewData>) :
 
         when (holder) {
             is HeaderViewHolder -> {
+                holder.bind()
             }
             is ItemViewHolder -> {
 //                리뷰 아이템 바인딩
