@@ -79,6 +79,8 @@ class MyProfileFragment : BaseFragment() {
                     ) {
                         if (response.isSuccessful) {
                             Toast.makeText(mContext, "프로필 사진이 변경되었습니다.", Toast.LENGTH_SHORT).show()
+//                            사용자가 선택한 사진(selectedImageUri)을 프로필 사진 뷰에 반영
+                            Glide.with(mContext).load(selectedImageUri).into(binding.imgProfile)
                         } else {
                             Toast.makeText(mContext, "프로필 사진 변경에 실패했습니다.", Toast.LENGTH_SHORT)
                                 .show()
