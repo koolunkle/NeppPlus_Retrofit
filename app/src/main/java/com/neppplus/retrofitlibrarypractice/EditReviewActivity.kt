@@ -33,6 +33,34 @@ class EditReviewActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        binding.img1.setOnClickListener {
+
+            val tempCategoryList = arrayListOf("아우터", "셔츠", "신발", "치마")
+            binding.smallCategoryListLayout.removeAllViews()
+
+            for (category in tempCategoryList) {
+                val tagBox = LayoutInflater.from(mContext).inflate(R.layout.tag_list_item, null)
+                val txtTag = tagBox.findViewById<TextView>(R.id.txtTag)
+                txtTag.text = "#${category}"
+                binding.smallCategoryListLayout.addView(tagBox)
+            }
+
+        }
+
+        binding.img2.setOnClickListener {
+
+            val tempCategoryList = arrayListOf("과자", "과일", "가공식품", "곡류")
+            binding.smallCategoryListLayout.removeAllViews()
+
+            for (category in tempCategoryList) {
+                val tagBox = LayoutInflater.from(mContext).inflate(R.layout.tag_list_item, null)
+                val txtTag = tagBox.findViewById<TextView>(R.id.txtTag)
+                txtTag.text = "#${category}"
+                binding.smallCategoryListLayout.addView(tagBox)
+            }
+
+        }
+
 //        한글자 입력할 때마다 -> 스페이스를 넣었는지 검사
 
         binding.edtTag.addTextChangedListener {
